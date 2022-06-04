@@ -1,4 +1,4 @@
-package com.co.sofka.exercise17;
+package com.co.sofka.messages.exercise17;
 
 import com.co.sofka.messages.Message;
 
@@ -53,8 +53,8 @@ public class Main {
         listElectrodomesticos.stream().filter(Lavadora.class::isInstance).forEach(list -> messages.showMessagePrice(String.valueOf(list.getPriceBase())));
 
         messages.showMessage("****************Suma de todos los precios de electrodomesticos****************");
-        double precioTotal = listElectrodomesticos.stream().mapToDouble(Electrodomestico::getPriceBase).sum();
-        messages.showMessagePrice("el precio de todos los electrodomesticos es " + precioTotal);
+        double priceTotal = listElectrodomesticos.stream().mapToDouble(Electrodomestico::getPriceBase).sum();
+        messages.showMessagePrice("el precio de todos los electrodomesticos es " + priceTotal);
 
         messages.showMessage("****************Suma de todos los precios de televisores****************");
         double priceTV = listElectrodomesticos.stream().filter(Television.class::isInstance).mapToDouble(Electrodomestico::getPriceBase).sum();

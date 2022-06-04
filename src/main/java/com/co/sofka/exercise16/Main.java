@@ -85,7 +85,6 @@ public class Main {
         gender = capture.nextLine().charAt(0);
 
         Person person2 = new Person(name, age, gender);
-
         person2.setHeight(1.80);
         person2.setWeight(85);
 
@@ -130,7 +129,7 @@ public class Main {
         final String message;
         message = "El señor@";
         if (person.calculateIMC() == -1) {
-            messages.showMessage("El señor " + person.getName() + " se encuentra en peso ideal");
+            messages.showMessage(message + person.getName() + " se encuentra en peso ideal");
         } else if (person.calculateIMC() == 0) {
             messages.showMessage(message + person.getName() + " se encuentra por debajo de su peso ");
         } else {

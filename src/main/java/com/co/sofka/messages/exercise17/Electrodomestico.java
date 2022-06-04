@@ -1,4 +1,4 @@
-package com.co.sofka.exercise17;
+package com.co.sofka.messages.exercise17;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * @version 02.03.003 29/05/2022
  * @since 01.
  */
-public class Electrodomestico {
+public abstract class Electrodomestico {
     private static final String COLOR_BASE = "Blanco";
     private static final char CONSUMPTION_ENERGY = 'F';
     private static final double PRICE_BASE = 100;
@@ -23,11 +23,11 @@ public class Electrodomestico {
     protected char consumptionEnergy;
     protected double weight;
 
-    public Electrodomestico() {
+    protected Electrodomestico() {
         loadColorAvailable();
     }
 
-    public Electrodomestico(double price, double weight) {
+    protected Electrodomestico(double price, double weight) {
         this.priceBase = price;
         this.weight = weight;
         color = COLOR_BASE;
@@ -46,7 +46,7 @@ public class Electrodomestico {
      * @param consumptionEnergy cosumo del electrodomestico.
      * @param weight            peso del electrodomestico.
      */
-    public Electrodomestico(double price, String color, char consumptionEnergy, double weight) {
+    protected Electrodomestico(double price, String color, char consumptionEnergy, double weight) {
         this.priceBase = price;
         this.weight = weight;
         calculatePriceFinalConsumptionEnergy();

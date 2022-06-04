@@ -1,4 +1,4 @@
-package com.co.sofka.exercise17;
+package com.co.sofka.messages.exercise17;
 
 /**
  * Clase Lavadora, la cual tiene atributos

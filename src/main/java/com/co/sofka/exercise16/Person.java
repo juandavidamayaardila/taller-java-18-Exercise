@@ -3,8 +3,8 @@ package com.co.sofka.exercise16;
 import java.util.Random;
 
 /**
- * Lee un número por teclado que pida el precio de un producto (puede tener decimales) y
- * calcule el precio final con IVA. El IVA sera una constante que sera del 21%.
+ * Clase persona la cual tiene sus atributos y los metodos para calcular
+ * el IMC de cada persona y verfiicar si es adulta o no.
  *
  * @author CW-DV-JDAA
  * @version 01.03.003 29/05/2022
@@ -16,11 +16,15 @@ public class Person {
      */
     private static final char DEFAULT_GENDER = 'H';
 
+    private static final int AGE_ADULT = 18;
     private final Random rnd = new Random();
+
+    private static final char[] LETTERS_LIST = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B',
+            'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
 
     private String name;
     private int age;
-    private final char DNI;
+    private final char dni;
     private char gender = DEFAULT_GENDER;
     private double weight;
     private double height;
@@ -29,7 +33,7 @@ public class Person {
      * Constructor por defecto, inicializa el DNI
      */
     public Person() {
-        this.DNI = this.calculateDNI();
+        this.dni = this.calculateDNI();
     }
 
     /**
@@ -44,16 +48,11 @@ public class Person {
     public Person(String name, int age, char gender, double weight, double height) {
         this.name = name;
         this.age = age;
-        this.DNI = this.calculateDNI();
+        this.dni = this.calculateDNI();
         this.weight = weight;
         this.height = height;
 
-        if (validateGender(gender)) {
-            this.gender = gender;
-        } else {
-            this.gender = DEFAULT_GENDER;
-        }
-
+        validateGender(gender);
     }
 
     /**
@@ -66,9 +65,8 @@ public class Person {
     public Person(String name, int age, char gender) {
         this.name = name;
         this.age = age;
-        this.DNI = this.calculateDNI();
-        this.gender = gender;
-
+        this.dni = this.calculateDNI();
+        validateGender(gender);
     }
 
     /**
@@ -113,7 +111,7 @@ public class Person {
      * @return el valor del atributo.
      */
     public char getDNI() {
-        return DNI;
+        return dni;
     }
 
     /**
@@ -183,7 +181,6 @@ public class Person {
         final int OVER_WEIGHT = 1;
         final int UNDER_WEIGHT = 0;
 
-
         double imc = getWeight() / (Math.pow(getHeight(), 2));
 
         if (imc < 20) {
@@ -193,7 +190,6 @@ public class Person {
         } else {
             return OVER_WEIGHT;
         }
-
     }
 
     /**
@@ -203,20 +199,21 @@ public class Person {
      * @return true si es mayor de edad false si es lo contrario
      */
     public boolean isAdult() {
-        return getAge() >= 18;
+        return getAge() >= AGE_ADULT;
     }
 
     /**
      * Determina si el genero ingresado es correcto o no
      *
      * @param gender opcion ingresada por el usuario.
-     * @return true si el valor es correcto.
      */
-    private boolean validateGender(char gender) {
-        return switch (gender) {
-            case 'H', 'M' -> true;
-            default -> false;
-        };
+    private void validateGender(char gender) {
+        String genderTmp = String.valueOf(gender).toLowerCase();
+        if ("H".equals(genderTmp) || "M".equals(genderTmp)) {
+            this.gender = gender;
+        } else {
+            this.gender = DEFAULT_GENDER;
+        }
     }
 
     /**
@@ -237,12 +234,9 @@ public class Person {
      * @return letra correspondiente segun numero generado.
      */
     private char calculateDNI() {
-        final char[] LETTERS = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
-
         int rest = generateNumberDNI() % 23;
-        return LETTERS[rest];
+        return Person.LETTERS_LIST[rest];
     }
-
 
     /**
      * Permite mostrar toda la informacion de la persona.
@@ -260,5 +254,4 @@ public class Person {
                ", height=" + getHeight() +
                '}';
     }
-
 }
